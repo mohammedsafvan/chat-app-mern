@@ -6,6 +6,7 @@ import authRouter from "./routes/auth.routes.js";
 import messageRouter from "./routes/messages.routes.js";
 import connectToMongoDb from "./db/connectToMongoDb.js";
 import protectRoute from "./middlewares/protectRoute.js";
+import usersRoute from "./routes/users.routes.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/messages", protectRoute, messageRouter);
+app.use("/api/users", protectRoute, usersRoute);
 
 app.listen(PORT, () => {
   connectToMongoDb();

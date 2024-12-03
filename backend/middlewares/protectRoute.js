@@ -1,6 +1,9 @@
 import jwt from "jsonwebtoken";
 import UserModel from "../models/user.model.js";
 
+/**
+ *This middleware ensures user is logged in and attaches `user` in `req`
+ */
 const protectRoute = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
