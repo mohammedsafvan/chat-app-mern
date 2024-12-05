@@ -1,6 +1,6 @@
 import UserModel from "../models/user.model.js";
+
 export const getUserForSideBar = async (req, res) => {
-  //
   try {
     const loggedInUserId = req.user._id;
     const allUsers = await UserModel.find({
