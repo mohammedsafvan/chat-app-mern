@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+  const { login } = useLogin();
+  const handleSubmit = async (e) => {
+    console.log(inputs);
+    e.preventDefault();
+    await login(inputs);
+  };
   return (
     <div className="flex flex-col justify-center items-center mx-auto min-w-96">
       <div className="p-6 w-full bg-clip-padding bg-gray-400 bg-opacity-0 rounded-3xl shadow-md backdrop-filter backdrop-blur-lg">
@@ -9,12 +20,16 @@ const Login = () => {
           Login
           <span className="text-blue-400"> ChatApp</span>
         </h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label className="p-2 label">
               <span className="text-base label-text">Username</span>
             </label>
             <input
+              onChange={(e) =>
+                setInputs({ ...inputs, username: e.target.value })
+              }
+              value={inputs.username}
               type="text"
               placeholder="Enter Username"
               className="w-full h-10 input input-bordered"
@@ -25,6 +40,10 @@ const Login = () => {
               <span className="text-base label-text">Password</span>
             </label>
             <input
+              value={inputs.password}
+              onChange={(e) =>
+                setInputs({ ...inputs, password: e.target.value })
+              }
               type="password"
               placeholder="Enter Password"
               className="w-full h-10 input input-bordered"
