@@ -25,7 +25,6 @@ export const signup = async (req, res) => {
     const newUser = new UserModel({
       fullName,
       username,
-      email,
       gender,
       password: hashedPassword,
       profilePic: gender === "male" ? boyAvatar : girlAvatar,
@@ -37,7 +36,6 @@ export const signup = async (req, res) => {
         _id: newUser.id,
         username: newUser.username,
         fullName: newUser.fullName,
-        email: newUser.email,
         profilePic: newUser.profilePic,
       });
     } else {
@@ -61,7 +59,6 @@ export const login = async (req, res) => {
       _id: user.id,
       username: user.username,
       fullName: user.fullName,
-      email: user.email,
       profilePic: user.profilePic,
     });
   } catch (e) {
