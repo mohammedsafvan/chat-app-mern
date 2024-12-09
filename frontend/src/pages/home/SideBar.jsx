@@ -1,4 +1,3 @@
-import React from "react";
 import SearchInput from "../../components/sidebar/SearchInput";
 import Conversation from "../../components/sidebar/Conversation";
 import LogoutButton from "../../components/sidebar/LogoutButton";

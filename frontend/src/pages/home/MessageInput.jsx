@@ -1,8 +1,5 @@
-import React from "react";
 import { IoSendSharp } from "react-icons/io5";
-import { TiMessages } from "react-icons/ti";
 const MessageInput = () => {
-  const noChatSelected = false;
   return (
     <form className="px-4 my-3">
       <div className="relative w-full">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
 
@@ -53,7 +53,7 @@ const Login = () => {
             to="/signup"
             className="inline-block mt-2 text-sm hover:text-blue-600 hover:underline"
           >
-            Don't have an Account
+           Don&apost have an Account
           </Link>
           <button className="mt-2 btn btn-block btn-sm">Login</button>
         </form>
