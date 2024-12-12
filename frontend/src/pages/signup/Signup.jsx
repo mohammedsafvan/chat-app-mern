@@ -12,7 +12,7 @@ const Signup = () => {
     gender: "",
   });
 
-  const { signup } = useSignup();
+  const {loading, signup } = useSignup();
   const handleCheckBoxChange = (gender) => {
     setInputs({ ...inputs, gender });
   };
@@ -95,7 +95,9 @@ const Signup = () => {
           >
             Already have an account?
           </Link>
-          <button className="mt-2 btn btn-block btn-sm">Signup</button>
+          <button disabled={loading} className="mt-2 btn btn-block btn-sm">
+            {loading ? <span className="loading loading-spinner"></span> : "Signup"}
+          </button>
         </form>
       </div>
     </div>

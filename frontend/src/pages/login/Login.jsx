@@ -7,9 +7,8 @@ const Login = () => {
     username: "",
     password: "",
   });
-  const { login } = useLogin();
+  const { login, loading } = useLogin();
   const handleSubmit = async (e) => {
-    console.log(inputs);
     e.preventDefault();
     await login(inputs);
   };
@@ -53,9 +52,11 @@ const Login = () => {
             to="/signup"
             className="inline-block mt-2 text-sm hover:text-blue-600 hover:underline"
           >
-           Don&apost have an Account
+           Don{"'"}t have an Account
           </Link>
-          <button className="mt-2 btn btn-block btn-sm">Login</button>
+          <button className="mt-2 btn btn-block btn-sm" disabled={loading}>
+            {loading ? <span className="loading loading-spinner"></span> : "Login"}
+          </button>
         </form>
       </div>
     </div>

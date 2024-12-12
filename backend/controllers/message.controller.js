@@ -4,15 +4,15 @@ import Message from "../models/message.model.js";
 export const sendMessage = async (req, res) => {
   try {
     const { message } = req.body;
-    const { id: recieverId } = req.parms;
+    const { id: recieverId } = req.params;
     const senderId = req.user._id;
 
-    let conversation = Conversation.findOne({
+    let conversation = await Conversation.findOne({
       members: { $all: [senderId, recieverId] },
     });
 
     if (!conversation) {
-      conversation = Conversation.create({
+      conversation = await Conversation.create({
         members: [senderId, recieverId],
       });
     }
@@ -25,7 +25,7 @@ export const sendMessage = async (req, res) => {
       conversation.messages.push(newMessage._id);
     }
     // Socket functionality here
-    Promise.all([conversation.save(), newMessage.save()]);
+    Promise.all([newMessage.save(), conversation.save()]);
     res.status(201).json(newMessage);
   } catch (e) {
     res.status(400).json({ error: e.message });
