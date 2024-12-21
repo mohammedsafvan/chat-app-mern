@@ -4,21 +4,20 @@ import Message from "../models/message.model.js";
 export const sendMessage = async (req, res) => {
   try {
     const { message } = req.body;
-    const { id: recieverId } = req.params;
+    const { id: receiverId } = req.params;
     const senderId = req.user._id;
-
     let conversation = await Conversation.findOne({
-      members: { $all: [senderId, recieverId] },
+      members: { $all: [senderId, receiverId] },
     });
 
     if (!conversation) {
       conversation = await Conversation.create({
-        members: [senderId, recieverId],
+        members: [senderId, receiverId],
       });
     }
     const newMessage = new Message({
       senderId,
-      recieverId,
+      receiverId,
       message,
     });
     if (newMessage) {
@@ -33,13 +32,12 @@ export const sendMessage = async (req, res) => {
 };
 export const getMessages = async (req, res) => {
   try {
-    const { id: userToChatId } = req.parms;
+    const { id: userToChatId } = req.params;
     const senderId = req.user._id;
 
-    let conversation = Conversation.findOne({
+    let conversation = await Conversation.findOne({
       members: { $all: [senderId, userToChatId] },
     }).populate("messages");
-
     if (!conversation) return res.status(200).json([]);
 
     const messages = conversation.messages;
