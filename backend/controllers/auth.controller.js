@@ -50,7 +50,7 @@ export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await UserModel.findOne({ username });
-    const isMatch = await bcrypt.compare(password, user.password || "");
+    const isMatch = await bcrypt.compare(password, user?.password || "");
     if (!isMatch) {
       return res.status(400).json({ error: "Invalid credentials" });
     }
@@ -62,7 +62,7 @@ export const login = async (req, res) => {
       profilePic: user.profilePic,
     });
   } catch (e) {
-    console.error(`Error in signup controller: ${e}`);
+    console.error(`Error in login controller: ${e}`);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -72,7 +72,7 @@ export const logout = (_, res) => {
     res.cookie("jwt", "", { maxAge: 1 });
     res.status(200).json({ message: "Logged out successfully" });
   } catch (e) {
-    console.error(`Error in signup controller: ${e}`);
+    console.error(`Error in logout controller: ${e}`);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };

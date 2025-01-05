@@ -12,9 +12,7 @@ const useGetMessages = () => {
       try {
         const res = await fetch(
           `http://localhost:5000/api/messages/${selectedConversation._id}`,
-          {
-            credentials: "include",
-          },
+          { credentials: "include" },
         );
         const data = await res.json();
         if (data.error) throw new Error(data.error);
