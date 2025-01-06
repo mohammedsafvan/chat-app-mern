@@ -13,6 +13,7 @@ const Message = ({ message }) => {
     ? authUser?.profilePic
     : selectedConversation?.profilePic;
   const bubbleBg = isFromMe ? "chat-bubble-primary" : "";
+  const shakeClass = message?.shouldShake ? "shake" : "";
 
   return (
     <>
@@ -22,7 +23,9 @@ const Message = ({ message }) => {
             <img alt="Tailwind CSS chat bubble component" src={profilePic} />
           </div>
         </div>
-        <div className={`chat-bubble ${bubbleBg}`}>{message.message}</div>
+        <div className={`chat-bubble ${bubbleBg} ${shakeClass}`}>
+          {message.message}
+        </div>
         <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">
           {messageTime}
         </div>
